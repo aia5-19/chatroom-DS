@@ -23,8 +23,7 @@ func main() {
 		log.Fatal(err)
 	}
 	in := bufio.NewScanner(os.Stdin)
-
-	// Join: keep asking until the username is accepted.
+//for join users
 	var name string
 	var users []string
 	for {
@@ -38,7 +37,7 @@ func main() {
 			break
 		}
 		if _, isServerErr := err.(rpc.ServerError); !isServerErr {
-			log.Fatal(err) // network problem
+			log.Fatal(err) // network connection problem 
 		}
 		fmt.Println("Error:", err)
 	}
@@ -58,7 +57,7 @@ func main() {
 	signal.Notify(sig, os.Interrupt)
 	go func() { <-sig; leave() }()
 
-	// Polling: ask the server for new messages twice a second and print them.
+	// Polling
 	go func() {
 		for range time.Tick(500 * time.Millisecond) {
 			var msgs []string
