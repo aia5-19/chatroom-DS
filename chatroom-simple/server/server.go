@@ -15,12 +15,12 @@ import (
 )
 
 type user struct {
-	inbox    []string  // messages waiting for this user to poll them
-	lastSeen time.Time // last time this user talked to the server
+	inbox    []string 
+	lastSeen time.Time 
 }
 
 type Chat struct {
-	mu    sync.Mutex // protects users (RPC calls run in different goroutines)
+	mu    sync.Mutex // protects users (RPC calls run in different goroutines) from race condition ..etc 
 	users map[string]*user
 }
 
